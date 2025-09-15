@@ -173,26 +173,23 @@ const NotesDisplay = () => {
 
   return (
     <div
-      className={` max-w-3xl mx-auto mt-6 p-4 ${
-        theme ? "bg-white text-gray-900" : "bg-gray-900 text-gray-100"
-      }`}
+      className={`${
+        theme ? "" : "dark"
+      } max-w-3xl mx-auto mt-6 pb-15 pt-5 px-5 rounded-3xl bg-[#f4d8b5c8] text-gray-900 dark:bg-gray-900 dark:text-gray-100`}
     >
       <ToastContainer />
-      <div className="flex mb-6 justify-around items-center gap-4">
-        <h2 className="font-bold text-2xl">
-          Notes from tenant_id {auth.tenant_id}
-        </h2>
+      <div className="flex mb-6 justify-around items-center gap-4 ">
+        <h2 className="font-medium text-2xl">Notes Created</h2>
         {console.log("Auth in NotesDisplay:", auth)}
         {auth.role == 1 &&
           (auth.subscribed ? (
             <h2 className="font-bold text-2xl">Thanks for subscribing</h2>
           ) : (
             <button
-              className="bg-sky-500 rounded-2xl px-1.5"
+              className=" bg-[#D99443] hover:bg-[#e6963b] dark:bg-blue-600 dark:hover:bg-blue-700 w-full ml-2 md:w-auto px-4 py-1 rounded shadow-md transition duration-200   disabled:opacity-60"
               onClick={handleSubscription}
             >
-              {" "}
-              subscribe{" "}
+              subscribe
             </button>
           ))}
       </div>
@@ -213,51 +210,61 @@ const NotesDisplay = () => {
 
             return (
               <div
-                key={id ?? Math.random()}
-                className={`relative border shadow-md rounded-3xl p-6 hover:shadow-lg transition duration-300 ${
-                  theme
-                    ? "bg-white border-gray-300"
-                    : "bg-gray-800 border-gray-700"
-                }`}
+                key={id}
+                className="relative rounded-xl p-6 hover:shadow-white-md border-2 border-[#e5c68c] hover:-translate-y-[2px] transition duration-300  dark:bg-gray-800 dark:border-gray-700
+                bg-[#f4d8b5c8]"
               >
-                <div className="flex flex-col space-y-4">
-                  <p className="whitespace-pre-wrap break-words">
-                    {displayedText}
-                  </p>
+                <div className=" grid grid-cols-12">
+                  <div className="flex flex-col space-y-4 col-span-10">
+                    <p className="whitespace-pre-wrap break-words">
+                      {displayedText}
+                    </p>
 
-                  {isLong && (
-                    <button
-                      onClick={() => toggleExpand(id)}
-                      className="self-start text-blue-600 hover:underline flex items-center gap-1 text-sm"
-                    >
-                      {isExpanded ? (
-                        <>
-                          Show less <ChevronUp size={16} />
-                        </>
-                      ) : (
-                        <>
-                          Show more <MoreHorizontal size={16} />
-                        </>
-                      )}
-                    </button>
-                  )}
-
-                  <div className="flex gap-4 mt-4">
+                    {isLong && (
+                      <button
+                        onClick={() => toggleExpand(id)}
+                        className="self-start text-blue-600 hover:text-blue-400 flex items-center gap-1 text-sm"
+                      >
+                        {isExpanded ? (
+                          <>
+                            less
+                            <ChevronUp
+                              size={16}
+                              className="transition-transform duration-200 transform rotate-0"
+                            />
+                          </>
+                        ) : (
+                          <>
+                            more
+                            <ChevronUp
+                              size={16}
+                              className="transition-transform duration-200 transform rotate-180"
+                            />
+                          </>
+                        )}
+                      </button>
+                    )}
+                  </div>
+                  <div className="flex flex-col gap-4 col-span-2">
                     <button
                       onClick={() => onUpdate(note)}
                       disabled={loading}
-                      className="flex items-center gap-2 border border-green-500 px-4 py-1 rounded-2xl hover:bg-green-50 text-green-600 disabled:opacity-50"
+                      className="bg-transparent border-none shadow-none flex items-center justify-center disabled:opacity-50"
                     >
-                      <Pencil size={14} />
-                      Edit
+                      <span className="border border-green-500 rounded-sm px-3 py-1 hover:bg-green-50 text-green-600 flex items-center gap-2 space-around">
+                        <Pencil size={14} />
+                        {/* Edit */}
+                      </span>
                     </button>
                     <button
                       onClick={() => onDelete(id)}
                       disabled={loading}
-                      className="flex items-center gap-2 border border-red-500 px-4 py-1 rounded-2xl hover:bg-red-50 text-red-600 disabled:opacity-50"
+                      className="bg-transparent border-none shadow-none flex items-center justify-center disabled:opacity-50"
                     >
-                      <Trash2 size={14} />
-                      Delete
+                      <span className="border border-red-500 rounded-sm px-3 py-1 hover:bg-red-50 text-red-600 flex items-center gap-2">
+                        <Trash2 size={14} />
+                        {/* Delete */}
+                      </span>
                     </button>
                   </div>
                 </div>
@@ -267,13 +274,17 @@ const NotesDisplay = () => {
         )}
       </div>
 
-      <div className="mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <div
+        className={`${
+          theme ? "" : "dark"
+        }  mt-8 flex flex-col md:flex-row md:items-center md:justify-between gap-3`}
+      >
         <button
           onClick={handleAddNoteClick}
           disabled={loading}
-          className="w-full md:w-auto px-6 py-3 rounded-3xl shadow-md transition bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-60"
+          className=" dark:bg-blue-600 dark:hover:bg-blue-700 bg-[#D99443] hover:bg-[#e6963b] w-full ml-2 md:w-auto px-4 py-1 rounded shadow-md transition duration-200  disabled:opacity-60"
         >
-          {formOpen ? "Cancel" : "Add Note"}
+          {formOpen ? "Undo" : "Add"}
         </button>
       </div>
 
@@ -286,14 +297,15 @@ const NotesDisplay = () => {
             placeholder="Write your note here..."
             required
             disabled={loading}
-            className="w-full p-4 rounded-3xl border border-gray-300 dark:border-gray-700 shadow-sm focus:outline-none focus:ring-4 focus:ring-blue-400 resize-none bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition"
+            className="w-full p-4 rounded-xl border border-gray-300 dark:border-gray-700 shadow-sm focus:outline-none focus:ring-2 dark:focus:ring-blue-400 focus:ring-[#D99443] resize-none dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition"
           />
           <button
             type="submit"
             disabled={loading}
-            className="mt-4 px-8 py-3 rounded-3xl bg-blue-600 text-white shadow-md hover:bg-blue-700 disabled:opacity-60 transition w-full md:w-auto"
+            className="bg-[#D99443] hover:bg-[#e6963b] dark:bg-blue-600  dark:hover:bg-blue-700
+             ml-2 mt-4 px-4 py-1 rounded  shadow-md  disabled:opacity-60 transition w-full md:w-auto"
           >
-            {editingId ? "Update Note" : "Submit Note"}
+            {editingId ? "Update" : "Submit"}
           </button>
         </form>
       )}

@@ -51,29 +51,27 @@ function Login() {
     }
   };
 
-  const toggleTheme = () => {
-    if (typeof setTheme === "function") setTheme((p) => !p);
-  };
+  const toggleTheme = () => setTheme(!theme);
 
   return (
     <>
       <div
         className={`${
           theme ? "" : "dark"
-        } min-h-screen flex items-center justify-center px-4 py-12 bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-500`}
+        } min-h-screen pt-20 bg-[#F4D8B5] text-[#1B404A] font-serif dark:bg-gray-900 dark:text-white transition-colors duration-500`}
       >
-        <div className="w-full max-w-md">
-          {/* Top right theme toggle */}
-          <div className="flex justify-end mb-4">
+        {/* Header */}
+        <div className="relative flex justify-center items-center px-4">
+          <h1 className="text-2xl font-medium sm:text-3xl md:text-4xl lg:text-5xl pb-3 text-center">
+            Notes App
+          </h1>
+          <div className="absolute right-[10%] max-sm:right-[5%] flex space-x-4">
             <button
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className={`inline-flex items-center gap-2 px-3 py-2 rounded-md border transition
-                ${
-                  theme
-                    ? "bg-white/0 border-gray-200 text-gray-800 hover:bg-gray-100"
-                    : "bg-white/3 border-gray-600 text-gray-100 hover:bg-white/5"
-                }`}
+              className="py-2 inline-flex items-center gap-2 px-3 rounded-md border transition
+                 border-[#1B404A] text-gray-800 dark:bg-white/3 dark:border-gray-600 dark:text-gray-100 dark:hover:bg-white/5
+                 bg-[#D99443] hover:bg-[#e6963b]"
             >
               {theme ? <Moon size={16} /> : <Sun size={16} />}
               <span className="text-sm hidden sm:inline">
@@ -81,33 +79,16 @@ function Login() {
               </span>
             </button>
           </div>
+        </div>
 
-          {/* Card */}
-          <div
-            className={`mx-auto rounded-lg shadow-md overflow-hidden transition-colors duration-500 bg-white border border-gray-100 dark:bg-slate-800 dark:border dark:border-gray-700`}
-            style={{
-              boxShadow: theme
-                ? "0 6px 18px rgba(15,23,42,0.06)"
-                : "0 6px 18px rgba(2,6,23,0.6)",
-            }}
-          >
-            <div className="p-8">
-              <div className="mb-6 text-center">
-                <h2
-                  className={`text-2xl font-semibold ${
-                    theme ? "text-gray-900" : "text-gray-100"
-                  }`}
-                >
-                  Login
-                </h2>
-                <p
-                  className={`mt-2 text-sm ${
-                    theme ? "text-gray-600" : "text-gray-300"
-                  }`}
-                >
-                  Sign in to continue to your Notes
-                </p>
-              </div>
+        {/* Content */}
+        <div className="p-10 px-30 pb-30">
+          <div className="bg-[#f4d8b5c8] py-3 dark:bg-gray-800 rounded-md">
+            <div className="max-w-md mx-auto p-10 rounded-xl shadow-md bg-[#e5c68c]  dark:bg-gray-950 dark:text-white">
+              <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
+              <p className="mt-2 text-sm text-center mb-6">
+                Sign in to continue to your Notes
+              </p>
 
               <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <div className="space-y-4">
@@ -115,7 +96,7 @@ function Login() {
                   <div>
                     <label
                       htmlFor="email"
-                      className={`block text-sm font-medium mb-1 text-gray-700 dark:text-gray-100`}
+                      className="block text-sm font-medium mb-1"
                     >
                       Email
                     </label>
@@ -125,10 +106,10 @@ function Login() {
                       type="email"
                       aria-invalid={errors.email ? "true" : "false"}
                       placeholder="you@example.com"
-                      className={`w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100 focus:outline-none
-                        focus:ring-2 ${
-                          theme ? "focus:ring-blue-300" : "focus:ring-sky-400"
-                        } transition`}
+                      className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 
+                   bg-[#F4D8B5] dark:bg-[#f4d8b5c8] 
+                   text-gray-900 dark:text-gray-100 
+                   focus:outline-none focus:ring-2 focus:ring-[#D99443] transition"
                       {...register("email", {
                         required: "Email is required",
                         pattern: {
@@ -148,7 +129,7 @@ function Login() {
                   <div>
                     <label
                       htmlFor="password"
-                      className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-100"
+                      className="block text-sm font-medium mb-1"
                     >
                       Password
                     </label>
@@ -158,10 +139,10 @@ function Login() {
                       type="password"
                       aria-invalid={errors.password ? "true" : "false"}
                       placeholder="Your password"
-                      className={`w-full px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 text-gray-900 dark:text-gray-100 focus:outline-none
-                        focus:ring-2 ${
-                          theme ? "focus:ring-blue-300" : "focus:ring-sky-400"
-                        } transition`}
+                      className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 
+                   bg-[#F4D8B5] dark:bg-[#f4d8b5c8] 
+                   text-gray-900 dark:text-gray-100 
+                   focus:outline-none focus:ring-2 focus:ring-[#D99443] transition"
                       {...register("password", {
                         required: "Password is required",
                         minLength: {
@@ -182,13 +163,12 @@ function Login() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className={`w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-white
-                        ${
-                          loading
-                            ? "opacity-60 cursor-not-allowed"
-                            : "hover:brightness-95"
-                        }
-                        bg-blue-600`}
+                      className={`w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-white 
+                    bg-[#D99443] hover:bg-[#e6963b] 
+                    dark:bg-blue-600 dark:hover:bg-blue-700 
+                    transition ${
+                      loading ? "opacity-60 cursor-not-allowed" : ""
+                    }`}
                       aria-busy={loading}
                     >
                       {loading ? "Signing in..." : "Login"}
@@ -197,34 +177,14 @@ function Login() {
                 </div>
               </form>
 
-              <div className="mt-4 text-center">
-                <span
-                  className={`${
-                    theme ? "text-gray-600" : "text-gray-300"
-                  } text-sm`}
-                >
-                  Don't have an account?{" "}
-                </span>
-                <Link to="/signup" className="align-middle ml-1">
-                  <button
-                    className={`text-sm underline rounded px-2 py-1 focus:outline-none
-                      ${
-                        theme
-                          ? "text-blue-600 hover:text-blue-700"
-                          : "text-sky-400 hover:text-sky-300"
-                      }`}
-                  >
-                    Signup
-                  </button>
-                </Link>
-              </div>
+              
             </div>
           </div>
+        </div>
 
-          {/* footer */}
-          <div className="mt-6 text-center text-xs text-gray-500 dark:text-gray-400">
-            © {new Date().getFullYear()} NotesApp
-          </div>
+        {/* footer */}
+        <div className="mt-6 text-center text-xs text-gray-700 dark:text-gray-400">
+          © {new Date().getFullYear()} NotesApp
         </div>
       </div>
 
