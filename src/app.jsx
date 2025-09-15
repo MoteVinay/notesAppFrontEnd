@@ -8,7 +8,7 @@ import Unauthorized from "./components/Unauthorized";
 import NotFound from "./components/NotFound";
 import Home from "./pages/Home";
 // import AdminHome from "./pages/AdminHome";
-import RequireAuth from "./components/requireAuth";
+import RequireAuth from "./components/RequireAuth";
 
 import Login from "./pages/Login";
 
