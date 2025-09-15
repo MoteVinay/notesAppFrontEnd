@@ -1,0 +1,30 @@
+{
+  "name": "client",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/material": "^7.3.2",
+    "@tailwindcss/vite": "^4.1.13",
+    "axios": "^1.12.1",
+    "lucide-react": "^0.544.0",
+    "preact": "^10.27.0",
+    "react-hook-form": "^7.62.0",
+    "react-router-dom": "^7.9.1",
+    "react-toastify": "^11.0.5"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.2",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.13",
+    "vite": "^7.1.2"
+  }
+}
